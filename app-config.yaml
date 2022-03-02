@@ -320,13 +320,13 @@ auth:
         clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
     github:
       development:
-        clientId: ${AUTH_GITHUB_CLIENT_ID}
-        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+        clientId: Iv1.cbf3ad4ead3b01e0
+        clientSecret: 245e0f897d1f02e4c23be67c8384c274e63386a7
         enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
     gitlab:
       development:
-        clientId: ${AUTH_GITLAB_CLIENT_ID}
-        clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
+        clientId: 86c7e5c9b8c5fd3613185ff0288aa4cb599fd2a018066de0d32f0bf99b084633
+        clientSecret: f1f4bc1460c16000bc37271f32dcd8119c7c3c7d7b9d30dc371a1912ee406f1c
         audience: ${GITLAB_BASE_URL}
     saml:
       entryPoint: 'http://localhost:7001/'

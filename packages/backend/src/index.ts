@@ -59,6 +59,8 @@ import jenkins from './plugins/jenkins';
 import permission from './plugins/permission';
 import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import createProxy from './plugins/createProxy';
 
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
@@ -133,6 +135,7 @@ async function main() {
     createEnv('tech-insights'),
   );
   const permissionEnv = useHotMemoize(module, () => createEnv('permission'));
+  const testEnv = useHotMemoize(module, () => createEnv('testEnv'));
 
   const apiRouter = Router();
   apiRouter.use('/catalog', await catalog(catalogEnv));
@@ -153,12 +156,16 @@ async function main() {
   apiRouter.use('/jenkins', await jenkins(jenkinsEnv));
   apiRouter.use('/permission', await permission(permissionEnv));
   apiRouter.use(notFoundHandler());
-
+  apiRouter.use(
+    '/new',
+    createProxyMiddleware({ target: 'https://reqres.in', changeOrigin: true }),
+  );
   const service = createServiceBuilder(module)
     .loadConfig(config)
     .addRouter('', await healthcheck(healthcheckEnv))
     .addRouter('', metricsHandler())
     .addRouter('/api', apiRouter)
+    .addRouter('/pro', await createProxy(testEnv))
     .addRouter('', await app(appEnv));
 
   await service.start().catch(err => {

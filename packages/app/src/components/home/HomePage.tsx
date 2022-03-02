@@ -27,6 +27,7 @@ import { Content, Header, Page } from '@backstage/core-components';
 import { HomePageSearchBar } from '@backstage/plugin-search';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
+import { DashboardSnapshotComponent } from '@backstage/plugin-newrelic-dashboard';
 
 const clockConfigs: ClockConfig[] = [
   {
@@ -100,6 +101,20 @@ export const HomePage = () => (
             ]}
           />
         </Grid>
+        <Grid item xs={12} md={12}>
+          <DashboardSnapshotComponent
+            guid="MjY0MDIwMXxWSVp8REFTSEJPQVJEfDMyNjUyODQ"
+            name="Vulnerability Dashboard"
+            duration={10000000}
+            permalink="https://onenr.io/0Zyw4ovl0Q3"
+          />
+          <DashboardSnapshotComponent
+            guid="MjY0MDIwMXxWSVp8REFTSEJPQVJEfDMyNjUyODU"
+            name="Vulnerability Dashboard"
+            duration={10000000}
+            permalink="https://onenr.io/0Zyw4ovl0Q3"
+          />
+        </Grid>{' '}
       </Grid>
     </Content>
   </Page>
